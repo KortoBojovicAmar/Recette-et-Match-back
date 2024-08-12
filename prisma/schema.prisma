@@ -1,0 +1,64 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  username  String   @unique
+  avatar    String   @default(uuid())
+  email     String   @unique
+  password  String
+  recipes   Recipe[]
+  createdAt DateTime @default(now())
+  deletedAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Recipe {
+  id          Int           @id @default(autoincrement())
+  type        RecipeType
+  diet        DietType[]
+  title       String
+  description String
+  ingredients Ingredients[]
+  steps       String
+  userId      Int
+  user        User          @relation(fields: [userId], references: [id])
+  createdAt   DateTime      @default(now())
+  deletedAt   DateTime      @default(now())
+  updatedAt   DateTime      @default(now())
+}
+
+model Ingredients {
+  id        Int      @id @default(autoincrement())
+  name      String
+  recipes   Recipe[]
+  createdAt DateTime @default(now())
+  deletedAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+enum RecipeType {
+  ENTREE
+  MEAL
+  DESSERT
+}
+
+enum DietType {
+  MEAT
+  VEGAN
+  VEGETARIAN
+  GLUTEN_FREE
+  DAIRY_FREE
+  NUT_FREE
+  SOY_FREE
+  EGG_FREE
+  FISH_FREE
+  SHELLFISH_FREE
+}
