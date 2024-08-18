@@ -15,9 +15,9 @@ model User {
   email     String   @unique
   password  String
   recipes   Recipe[]
-  createdAt DateTime @default(now())
-  deletedAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt DateTime? @default(now())
+  deletedAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
 }
 
 model Recipe {
@@ -30,18 +30,18 @@ model Recipe {
   steps       String
   userId      Int
   user        User          @relation(fields: [userId], references: [id])
-  createdAt   DateTime      @default(now())
-  deletedAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now())
+  createdAt   DateTime?      @default(now())
+  deletedAt   DateTime?      @default(now())
+  updatedAt   DateTime?      @default(now())
 }
 
 model Ingredients {
   id        Int      @id @default(autoincrement())
   name      String
   recipes   Recipe[]
-  createdAt DateTime @default(now())
-  deletedAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt DateTime? @default(now())
+  deletedAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
 }
 
 enum RecipeType {

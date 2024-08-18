@@ -5,7 +5,8 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
-import { PrismaService } from './prismaService/prisma.service';
+import { CommonModule } from './common/common.module';
+
 
 @Module({
   imports: [
@@ -14,8 +15,9 @@ import { PrismaService } from './prismaService/prisma.service';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     UserModule,
+    CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService],
 })
 export class AppModule {}

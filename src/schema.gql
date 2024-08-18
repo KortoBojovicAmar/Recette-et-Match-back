@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserGraphQL {
+  name: String!
+  username: String
+  email: String!
+  password: String!
+}
+
+type Query {
+  getAllUsers: [UserGraphQL!]!
+  getUserByEmail(email: String!): UserGraphQL!
+}
+
+type Mutation {
+  createUser(data: UserInputGraphQL!): UserGraphQL!
+  updateUser(data: UserInputGraphQL!, id: Int!): UserGraphQL!
+}
+
+input UserInputGraphQL {
+  name: String!
+  username: String!
+  email: String!
+  password: String!
+}
