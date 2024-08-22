@@ -3,8 +3,8 @@ import { User as UserDB } from "@prisma/client";
 
 @ObjectType()
 export class UserGraphQL {
-    // @Field(() => Int)
-    // id: UserDB['id'];
+    @Field(() => Int)
+    id: UserDB['id'];
 
     @Field(()=> String)
     name: UserDB['name'];

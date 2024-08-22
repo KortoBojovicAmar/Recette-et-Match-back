@@ -6,6 +6,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { CommonModule } from './common/common.module';
+import { RecipeModule } from './recipe/recipe.module';
+import { IngredientModule } from './ingredient/ingredient.module';
 
 
 @Module({
@@ -16,6 +18,8 @@ import { CommonModule } from './common/common.module';
     }),
     UserModule,
     CommonModule,
+    RecipeModule,
+    IngredientModule,
   ],
   controllers: [AppController],
   providers: [AppService],
