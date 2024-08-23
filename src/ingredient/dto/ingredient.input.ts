@@ -11,8 +11,8 @@ export class IngredientsInputGraphQL {
     @Field(()=> String)
     quantity: IngredientsDB['quantity'];
 
-    // @Field(()=> [RecipeGraphQL],{nullable : true})
-    // recipes?: RecipeDB[];
+    @Field(()=> [RecipeGraphQL],{nullable : true})
+    recipes?: RecipeDB[];
     
     
 }

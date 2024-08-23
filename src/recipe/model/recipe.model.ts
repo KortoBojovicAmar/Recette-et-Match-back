@@ -1,6 +1,7 @@
 import { Field, ObjectType, Int, GraphQLISODateTime } from "@nestjs/graphql";
 import { DietType, Recipe as RecipeDB, Ingredients as IngredientsDB, RecipeType } from "@prisma/client";
 import { IngredientsGraphQL } from "src/ingredient/model/ingredient.model";
+import { UserGraphQL } from "src/user/model/user.model";
 
 @ObjectType()
 export class RecipeGraphQL {
@@ -17,11 +18,20 @@ export class RecipeGraphQL {
     @Field(()=> String)
     description: RecipeDB['description'];
 
-    @Field(()=> [IngredientsGraphQL])
-    ingredients: IngredientsDB[];
+    // @Field(()=> [IngredientsGraphQL])
+    // ingredients: IngredientsDB[];
 
+    @Field(()=> String)
+    steps: RecipeDB['steps'];
 
-    @Field(()=> [DietType])
-    diet: RecipeDB['diet'];
+    @Field(()=> [String])
+    diet: DietType[];
+
+    @Field(()=> UserGraphQL, { nullable: true })
+    user: UserGraphQL;
+
+    @Field(()=> Int)
+    userid: number;
+
 
 }

@@ -18,16 +18,29 @@ export class IngredientService {
         });
     }
 
-    async createIngredient(data: IngredientsInputGraphQL) {
+    async createIngredient(data: IngredientsInputGraphQL,) {
         return this.prisma.ingredients.create({
-            data: {...data, createdAt: new Date()},
+            data: {
+                ...data,
+                 createdAt: new Date(),
+                 recipes : {
+                    connect: data.recipes.map(recipe => ({ id: recipe.id}))
+                 },
+            
+                },
         });
     }
 
     async updateIngredient(data: IngredientsInputGraphQL, id: number) {
         return this.prisma.ingredients.update({
             where: { id },
-            data
+            data: {
+                ...data,
+                updatedAt: new Date(),
+                recipes : {
+                    connect: data.recipes.map(recipe => ({ id: recipe.id}))
+                }
+            }
         })
     }
 
