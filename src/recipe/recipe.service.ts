@@ -17,13 +17,53 @@ export class RecipeService {
         });
     }
 
+    // async createRecipe(data: RecipeInputGraphQL) {
+    //     return this.prisma.recipe.create({
+    //         data: {
+    //             ...data, 
+    //             createdAt: new Date(),
+    //             user: {
+    //                 connect: { id: data.userId }
+    //             },
+    //             ingredients: {
+    //                 create: data.ingredients.map(ingredient => ({
+    //                     name: ingredient.name,
+    //                     quantity: ingredient.quantity,
+    //                 }))
+    //             }
+    //         },
+    //     });
+    // }
+
+
+    
+    // async updateRecipe(data: RecipeInputGraphQL, id: number) {
+    //     return this.prisma.recipe.update({
+    //         where: { id },
+    //         data: {
+    //             ...data,
+    //             updatedAt: new Date(),
+    //             user: {
+    //                 connect: { id: data.userId }
+    //             },
+    //             ingredients: {
+    //                 create: data.ingredients.map(ingredient => ({
+    //                     name: ingredient.name,
+    //                     quantity: ingredient.quantity,
+    //                 }))
+    //             }
+    //         }
+    //     })
+    // }
+
     async createRecipe(data: RecipeInputGraphQL) {
+        const { userId, ...recipeData } = data;
         return this.prisma.recipe.create({
             data: {
-                ...data, 
+                ...recipeData,
                 createdAt: new Date(),
                 user: {
-                    connect: { id: data.userid }
+                    connect: { id: userId }
                 },
                 ingredients: {
                     create: data.ingredients.map(ingredient => ({
@@ -34,17 +74,16 @@ export class RecipeService {
             },
         });
     }
-
-
     
     async updateRecipe(data: RecipeInputGraphQL, id: number) {
+        const { userId, ...recipeData } = data;
         return this.prisma.recipe.update({
             where: { id },
             data: {
-                ...data,
+                ...recipeData,
                 updatedAt: new Date(),
                 user: {
-                    connect: { id: data.userid }
+                    connect: { id: userId }
                 },
                 ingredients: {
                     create: data.ingredients.map(ingredient => ({
@@ -52,8 +91,8 @@ export class RecipeService {
                         quantity: ingredient.quantity,
                     }))
                 }
-            }
-        })
+            },
+        });
     }
     
     async deleteRecipe(id: number) {

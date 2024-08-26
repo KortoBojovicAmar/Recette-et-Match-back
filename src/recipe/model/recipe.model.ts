@@ -28,10 +28,10 @@ export class RecipeGraphQL {
     diet: DietType[];
 
     @Field(()=> UserGraphQL, { nullable: true })
-    user: UserGraphQL;
+    user?: UserGraphQL;
 
     @Field(()=> Int)
-    userid: number;
+    userId?: number;
 
 
 }

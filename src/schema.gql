@@ -10,14 +10,41 @@ type UserGraphQL {
   password: String!
 }
 
+type RecipeGraphQL {
+  id: Int!
+  type: String!
+  title: String!
+  description: String!
+  steps: String!
+  diet: [String!]!
+  user: UserGraphQL
+  userId: Int!
+}
+
+type IngredientsGraphQL {
+  id: Int!
+  name: String!
+  quantity: String!
+  recipes: [RecipeGraphQL!]
+}
+
 type Query {
   getAllUsers: [UserGraphQL!]!
   getUserByEmail(email: String!): UserGraphQL!
+  getAllRecipes: [RecipeGraphQL!]!
+  getRecipeById(id: Int!): RecipeGraphQL!
+  getAllIngredients: [IngredientsGraphQL!]!
+  getIngredientById(id: Int!): IngredientsGraphQL!
 }
 
 type Mutation {
   createUser(data: UserInputGraphQL!): UserGraphQL!
   updateUser(data: UserInputGraphQL!, id: Int!): UserGraphQL!
+  createRecipe(data: RecipeInputGraphQL!): RecipeGraphQL!
+  updateRecipe(data: RecipeInputGraphQL!, id: Int!): RecipeGraphQL!
+  deleteRecipe(id: Int!): RecipeGraphQL!
+  createIngredient(data: IngredientsInputGraphQL!): IngredientsGraphQL!
+  deleteIngredient(id: Int!): IngredientsGraphQL!
 }
 
 input UserInputGraphQL {
@@ -25,4 +52,20 @@ input UserInputGraphQL {
   username: String!
   email: String!
   password: String!
+}
+
+input RecipeInputGraphQL {
+  type: String!
+  title: String!
+  description: String!
+  ingredients: [IngredientsInputGraphQL!]!
+  steps: String!
+  diet: [String!]!
+  userId: Int!
+}
+
+input IngredientsInputGraphQL {
+  name: String!
+  quantity: String!
+  recipes: [RecipeInputGraphQL!]
 }

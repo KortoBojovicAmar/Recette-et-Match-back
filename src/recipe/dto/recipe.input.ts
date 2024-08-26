@@ -1,5 +1,6 @@
 import { InputType, Field, Int } from "@nestjs/graphql";
 import { DietType, Recipe as RecipeDB, Ingredients as IngredientsDB, RecipeType} from "@prisma/client";
+import { IngredientsInputGraphQL } from "src/ingredient/dto/ingredient.input";
 import { IngredientsGraphQL } from "src/ingredient/model/ingredient.model";
 
 @InputType()
@@ -14,7 +15,7 @@ export class RecipeInputGraphQL {
     @Field(()=> String)
     description: RecipeDB['description'];
 
-    @Field(()=> [IngredientsGraphQL])
+    @Field(()=> [IngredientsInputGraphQL])
     ingredients: IngredientsDB[];
 
     @Field(()=> String)
@@ -24,5 +25,5 @@ export class RecipeInputGraphQL {
     diet: DietType[];
 
     @Field(()=> Int)
-    userid: number;
+    userId: number;
 }
