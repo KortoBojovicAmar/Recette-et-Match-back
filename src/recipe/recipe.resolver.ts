@@ -29,6 +29,14 @@ export class RecipeResolver {
             return recipe;
         }
 
+    @Mutation(() => String)
+    async generateRecipeFromIngredients (
+        @Args('ingredients', { type: ()=> [String] })
+        ingredients: string[]): Promise<any> {
+            const recipe = await this.recipeService.generateRecipeFromIngredients(ingredients);
+            return recipe;
+        }
+
     @Mutation(() => RecipeGraphQL)
     async updateRecipe (
         @Args('data', { type: ()=> RecipeInputGraphQL, nullable: false })

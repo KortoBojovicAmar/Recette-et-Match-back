@@ -41,6 +41,7 @@ type Mutation {
   createUser(data: UserInputGraphQL!): UserGraphQL!
   updateUser(data: UserInputGraphQL!, id: Int!): UserGraphQL!
   createRecipe(data: RecipeInputGraphQL!): RecipeGraphQL!
+  generateRecipeFromIngredients(ingredients: [String!]!): String!
   updateRecipe(data: RecipeInputGraphQL!, id: Int!): RecipeGraphQL!
   deleteRecipe(id: Int!): RecipeGraphQL!
   createIngredient(data: IngredientsInputGraphQL!): IngredientsGraphQL!
